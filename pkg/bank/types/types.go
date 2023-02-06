@@ -3,14 +3,14 @@ package types
 // Money представляет собой денежную сумму в минимальных единицах (центы, копейки, дирамы и т.д.)
 type Money int64
 
+// PaymentCategory представляет собой категорию, в коротой был савершён поатёж (авто, аптеки, рестораны и т.д.)
+type PaymentCategory string
+
+// PaymentStatus представляет собой статус платежа.
+type PaymentStatus string
+
 // Currency представляет код валюты
 type Currency string
-
-// Category представляет собой категорию, в которой был совершён платёж (авто, аптеки, рестораны и т.д.)
-type Category string
-
-// Status представляет собой статус платежа.
-type Status string
 
 // Код валюты
 const(
@@ -19,25 +19,27 @@ const(
 	USD Currency = "USD"
 )
 
-// Предоределение статус платежей
-const(
-	StatusOk Status = "OK"
-	StatusFail Status = "FAIL"
-	StatusInProgress Status = "INPROGRESS"
-) 
+// Предопределённые статусы платежей.
+const (
+	PaymentStatusOk			PaymentStatus = "OK"
+	PaymentStatusFail		PaymentStatus = "FAIL"
+	PaymentStatusInProgress	PaymentStatus = "INPROGRESS"
+)
 
 // PAN представляет номер карты
 type PAN string
 
 // Payment представляет информацию о платеже.
 type Payment struct{
-	ID int
-	Amount Money
-	Category Category
-	Status Status
+	ID			string
+	Amount		Money
+	Category	PaymentCategory
+	Status		PaymentStatus
 }
 
-// Card представляет информацию о платёжной карте
+type Phone string
+
+// Card представляет информацию о платёжной карте.
 type Card struct {
 	ID			int
 	PAN			PAN
@@ -49,5 +51,9 @@ type Card struct {
 	Active		bool
 }
 
-
-// uiifyuf
+// Account представляет информацию о счёте пользователя.
+type Account struct {
+	ID		int64
+	Phone	Phone
+	Balance	Money
+}
